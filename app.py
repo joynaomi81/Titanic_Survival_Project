@@ -9,7 +9,7 @@ if os.path.exists('pretrained_model_pkl'):
     
     # Load the pre-trained model
     try:
-        model = joblib.load('pretrained_model.pkl')
+        model = joblib.load('pretrained_model_pkl')
     except Exception as e:
         st.error(f"Error loading the model: {e}")
         st.stop()
