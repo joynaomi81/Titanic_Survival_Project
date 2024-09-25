@@ -3,7 +3,8 @@ import pandas as pd
 import joblib
 
 # Load the trained model
-model = joblib.load('/content/final_model.pkl')
+joblib.dump(final_model, 'final_model.pkl')
+     
 
 # Title of the app
 st.title('Titanic Survival Prediction')
