@@ -4,12 +4,12 @@ import pandas as pd
 import os
 
 # Check if the model file exists
-if os.path.exists('pretrained_model_pkl'):
+if os.path.exists('new_pretrained_model.pkl'):
     st.success("The model has been successfully loaded!")
     
     # Load the pre-trained model
     try:
-        model = joblib.load('pretrained_model_pkl')
+        model = joblib.load('new_pretrained_model.pkl')
     except Exception as e:
         st.error(f"Error loading the model: {e}")
         st.stop()
@@ -26,15 +26,11 @@ st.header("Input Passenger Details")
 # Input fields for user data
 pclass = st.selectbox('Passenger Class (Pclass)', [1, 2, 3])
 sex = st.selectbox('Sex', ['Male', 'Female'])
-sibsp = st.number_input('Number of Siblings/Spouses Aboard (SibSp)', min_value=0, max_value=10, value=0)
-parch = st.number_input('Number of Parents/Children Aboard (Parch)', min_value=0, max_value=10, value=0)
 
 # Convert inputs into a DataFrame for the model
 data = {
     'Pclass': [pclass],
-    'Sex': [1 if sex == 'Male' else 0],  # Encode 'Male' as 1 and 'Female' as 0
-    'SibSp': [sibsp],
-    'Parch': [parch]
+    'Sex': [1 if sex == 'Male' else 0]  # Encode 'Male' as 1 and 'Female' as 0
 }
 input_df = pd.DataFrame(data)
 
