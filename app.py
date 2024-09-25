@@ -26,11 +26,15 @@ st.header("Input Passenger Details")
 # Input fields for user data
 pclass = st.selectbox('Passenger Class (Pclass)', [1, 2, 3])
 sex = st.selectbox('Sex', ['Male', 'Female'])
+sibsp = st.number_input('Number of Siblings/Spouses Aboard (SibSp)', min_value=0, max_value=10, value=0)
+parch = st.number_input('Number of Parents/Children Aboard (Parch)', min_value=0, max_value=10, value=0)
 
 # Convert inputs into a DataFrame for the model
 data = {
     'Pclass': [pclass],
-    'Sex': [1 if sex == 'Male' else 0]  # Encode 'Male' as 1 and 'Female' as 0
+    'Sex': [1 if sex == 'Male' else 0],  # Encode 'Male' as 1 and 'Female' as 0
+    'SibSp': [sibsp],
+    'Parch': [parch]
 }
 input_df = pd.DataFrame(data)
 
