@@ -4,7 +4,7 @@ import pandas as pd
 import os
 
 # Check if the file exists
-if os.path.exists('pretrained_model.pkl'):
+if os.path.exists('pretrained_model_pkl'):
     st.success("The model has been successfully saved! Loading the model...")
     
     # Load the pre-trained model
