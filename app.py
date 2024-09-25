@@ -8,7 +8,11 @@ if os.path.exists('pretrained_model.pkl'):
     st.success("The model has been successfully saved! Loading the model...")
     
     # Load the pre-trained model
-    model = joblib.load('pretrained_model.pkl')
+    try:
+        model = joblib.load('pretrained_model_pkl')
+    except Exception as e:
+        st.error(f"Error loading the model: {e}")
+        st.stop()
 else:
     st.error("The model file does not exist.")
     st.stop()  # Stop execution if the model file is missing
@@ -40,10 +44,12 @@ input_df = pd.DataFrame(data)
 
 # Prediction button
 if st.button('Predict'):
-    prediction = model.predict(input_df)
-    
-    # Display the result
-    if prediction[0] == 1:
-        st.success("This passenger would have survived!")
-    else:
-        st.error("This passenger would not have survived.")
+    try:
+        prediction = model.predict(input_df)
+        # Display the result
+        if prediction[0] == 1:
+            st.success("This passenger would have survived!")
+        else:
+            st.error("This passenger would not have survived.")
+    except Exception as e:
+        st.error(f"Error making prediction: {e}")
