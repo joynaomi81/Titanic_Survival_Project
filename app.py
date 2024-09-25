@@ -3,13 +3,13 @@ import joblib
 import pandas as pd
 import os
 
-# Check if the file exists
-if os.path.exists('pretrained_model_pkl'):
-    st.success("The model has been successfully saved! Loading the model...")
+# Check if the model file exists
+if os.path.exists('pretrained_model.pkl'):
+    st.success("The model has been successfully loaded!")
     
     # Load the pre-trained model
     try:
-        model = joblib.load('pretrained_model_pkl')
+        model = joblib.load('pretrained_model.pkl')
     except Exception as e:
         st.error(f"Error loading the model: {e}")
         st.stop()
@@ -26,19 +26,11 @@ st.header("Input Passenger Details")
 # Input fields for user data
 pclass = st.selectbox('Passenger Class (Pclass)', [1, 2, 3])
 sex = st.selectbox('Sex', ['Male', 'Female'])
-age = st.number_input('Age', min_value=0, max_value=100, value=30)
-sibsp = st.number_input('Number of Siblings/Spouses Aboard (SibSp)', min_value=0, max_value=10, value=0)
-parch = st.number_input('Number of Parents/Children Aboard (Parch)', min_value=0, max_value=10, value=0)
-fare = st.number_input('Fare', min_value=0.0, max_value=1000.0, value=32.0)
 
 # Convert inputs into a DataFrame for the model
 data = {
     'Pclass': [pclass],
-    'Sex': [1 if sex == 'Male' else 0],  # Encode 'Male' as 1 and 'Female' as 0
-    'Age': [age],
-    'SibSp': [sibsp],
-    'Parch': [parch],
-    'Fare': [fare]
+    'Sex': [1 if sex == 'Male' else 0]  # Encode 'Male' as 1 and 'Female' as 0
 }
 input_df = pd.DataFrame(data)
 
